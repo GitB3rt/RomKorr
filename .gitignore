@@ -25,10 +25,7 @@ conda/
 Thumbs.db
 
 # Data & outputs (projekt-spezifisch)
-data/raw/
-data/processed/
-outputs/
-*.parquet
-
-# Alte HTMLs
 outputs/alt
+
+#alte Daten
+alt
