@@ -42,18 +42,15 @@ Das Projekt verfolgt drei Hauptziele:
 │ └── romkorr/
 │ ├── 01_RomKorr_Scraper_clean.ipynb
 │ ├── 02_RomKorr_DataPrep.ipynb
-│ └── 03_RomKorr_MapBuilder_v9.ipynb
+│ └── 03_RomKorr_MapBuilder.ipynb
 │
 ├── outputs/
 │ ├── romkorr_map.html # Aktuelle finale Karten-HTML
-│ └── alt/ # Frühere Karten-Versionen
+│ └── alt/ # Frühere Karten-Versionen (nicht versioniert)
 │
-├── notebooks/ # Optionaler Arbeitsbereich
+├── backup/ # Manuelle Sicherungen (nicht versioniert)
 │
-├── alt/ # Historische Entwicklungsstände (Archiv)
-│ └── Stand24/
-│
-└── .ipynb_checkpoints/ # Automatisch erzeugt (nicht versionieren)
+└── requirements.txt # Python-Abhängigkeiten
 
 ---
 
@@ -102,21 +99,24 @@ Diese Dateien bilden die **Grundlage aller weiteren Analysen und Visualisierunge
 ---
 
 ## 3. Karten- und Website-Generierung  
-### `03_RomKorr_MapBuilder_v9.ipynb`
+### `03_RomKorr_MapBuilder.ipynb`
 
 **Zweck**
 - Erzeugung der interaktiven Karte mit **Folium und JavaScript**
 - Aufbau der Benutzeroberfläche (Sidebar)
 - Filter nach:
-  - Person
-  - Ort
-  - Jahr (von / bis)
+  - Person (Suchfeld über alle Personen, findet auch Teilnamen wie „Schlegel")
+  - Ort (Dropdown passt sich den übrigen Filtern dynamisch an)
+  - Jahr (von / bis), optional nur datierte Briefe
 - Darstellung von:
-  - Korrespondenz-Linien
-  - Heatmap
+  - Korrespondenz-Routen (gebündelt; Liniendicke/Deckkraft = Briefanzahl, Klick zeigt Richtungs-Statistik)
+  - filterabhängiger Heatmap
   - Hotspots
+  - Zeit-Animation (Jahres-Slider mit Play-Button, Einzeljahr oder kumulativ)
+  - Netzwerk-Ansicht (wer schrieb wem, d3-force; Klick auf Person filtert die Karte)
   - Ergebnisliste mit Pagination
-- CSV-Export der gefilterten Briefe
+- CSV-Export der gefilterten Briefe (Excel-kompatibel, UTF-8-BOM)
+- Permalink: Filterzustand steht in der URL und ist als Link teilbar
 
 **Ergebnis**
 - Statische HTML-Datei:
@@ -149,46 +149,52 @@ Getestet mit Python 3.11 (Conda):
 - pandas  
 - folium  
 - branca  
+- requests, beautifulsoup4 (nur für das Scraping-Notebook)  
+- pyarrow (Parquet-Dateien)  
 
 Empfohlene Einrichtung:
 
 ```bash
 conda create -n romkorr python=3.11
 conda activate romkorr
-pip install numpy pandas folium branca
+pip install -r requirements.txt
+```
 
+---
 
-Veröffentlichung und Nutzung
+## Veröffentlichung und Nutzung
 
-Die erzeugte HTML ist statisch (kein Server notwendig)
+- Die erzeugte HTML ist **statisch** (kein Server notwendig) — die eine Datei
+  `outputs/romkorr_map.html` kann direkt auf einen Webspace hochgeladen werden.
+- Es werden keine personenbezogenen Daten von Besuchern verarbeitet.
+- Externe Inhalte (werden beim Öffnen aus dem Internet geladen):
+  - OpenStreetMap-Kacheln / Leaflet (Standard-Basiskarte)
+  - CARTO (alternative helle Basiskarte, im LayerControl wählbar)
+  - d3.js via jsDelivr-CDN (nur für die Netzwerk-Ansicht)
+  - Verlinkungen auf öffentlich zugängliche Briefquellen (briefe-der-romantik.de)
+- **Hinweis lokales Öffnen:** Beim Öffnen per Doppelklick (`file://`) blockieren
+  die OSM-Server die Kacheln teilweise (fehlender Referer) — dann im LayerControl
+  auf „CartoDB Positron" umschalten. Auf einer gehosteten Website tritt das
+  Problem nicht auf.
+- Bei Veröffentlichung sollte die Datenschutzerklärung auf externe Kartendienste,
+  CDN-Einbindung und ausgehende Links hinweisen.
 
-Es werden keine personenbezogenen Daten verarbeitet
+---
 
-Externe Inhalte:
-
-OpenStreetMap / Leaflet
-
-Verlinkungen auf öffentlich zugängliche Briefquellen
-
-Bei Veröffentlichung auf einer Website sollte in der Datenschutzerklärung auf
-externe Kartendienste und ausgehende Links hingewiesen werden.
-
-Status und Weiterentwicklung
+## Status und Weiterentwicklung
 
 Der aktuelle Stand bietet:
 
-stabilen, reproduzierbaren Workflow
+- stabilen, reproduzierbaren Workflow (inkl. Harmonisierung fehlerhafter Geokodierungen)
+- kombinierbare Filter: Person (Suchfeld), Ort, Jahr, Route, nur datierte Briefe
+- Routen-Bündelung, filterabhängige Heatmap, Zeit-Animation
+- Netzwerk-Ansicht der Korrespondenzen
+- Permalinks und CSV-Export
 
-leistungsfähige Filter
+Ideen für Erweiterungen:
 
-kombinierte Karten- und Listenansicht
-
-Geplante, noch nicht implementierte Erweiterungen:
-
-filterabhängige Heatmap
-
-visuelle Kodierung der Korrespondenzrichtung
-
-zeitliche Animationen
-
-Netzwerk-Ansichten
+- visuelle Kodierung der Korrespondenzrichtung (Pfeile oder Farbverlauf)
+- gebogene Linien (trennt Hin- und Rückrichtung optisch)
+- Statistik-Panel (Briefe pro Jahr zum aktuellen Filter)
+- Personen-Profile (Steckbrief mit Top-Partnern und -Orten)
+- Auslagerung der Briefdaten in eine separate JSON-Datei (schnelleres Laden)
