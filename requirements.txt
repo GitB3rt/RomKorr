@@ -1,0 +1,9 @@
+# RomKorr – Python-Abhängigkeiten (getestet mit Python 3.11)
+numpy
+pandas
+pyarrow
+folium
+branca
+requests
+beautifulsoup4
+jupyter

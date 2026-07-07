@@ -29,3 +29,7 @@ outputs/alt
 
 #alte Daten
 alt
+
+# Backups & Scraper-HTML-Cache
+backup/
+data/cache/
