@@ -120,6 +120,12 @@ Diese Dateien bilden die **Grundlage aller weiteren Analysen und Visualisierunge
   - Zeit-Animation (Jahres-Slider mit Play-Button, Einzeljahr oder kumulativ)
   - Netzwerk-Ansicht (wer schrieb wem, d3-force; Klick auf Person filtert die Karte)
   - Ergebnisliste mit Pagination
+- Historische Karten-Ebene: F. L. Güssefeld, „Charte das Deutsche Reich" (Nürnberg 1789,
+  Homännische Erben) als zuschaltbares Overlay über der modernen Karte — Punkte, Linien
+  und Heatmap bleiben darüber sichtbar, die Deckkraft ist per Regler einstellbar.
+  Die Karten-ID stammt aus `data/raw/georef_map.json` (Allmaps-Georeferenzierungs-Annotation);
+  die Kacheln liefert der Allmaps-Tileserver live aus dem IIIF-Digitalisat der
+  Princeton University Library — im Repo liegen keine Kartenbilder.
 - CSV-Export der gefilterten Briefe (Excel-kompatibel, UTF-8-BOM)
 - Permalink: Filterzustand steht in der URL und ist als Link teilbar
 
@@ -175,6 +181,8 @@ pip install -r requirements.txt
 - Externe Inhalte (werden beim Öffnen aus dem Internet geladen):
   - OpenStreetMap-Kacheln / Leaflet (Standard-Basiskarte)
   - CARTO (alternative helle Basiskarte, im LayerControl wählbar)
+  - Allmaps-Tileserver (`allmaps.xyz`) — Kacheln der historischen Karte
+    (Güssefeld 1789; Digitalisat: Princeton University Library, per IIIF)
   - d3.js via jsDelivr-CDN (nur für die Netzwerk-Ansicht)
   - Verlinkungen auf öffentlich zugängliche Briefquellen (briefe-der-romantik.de)
 - **Hinweis lokales Öffnen:** Beim Öffnen per Doppelklick (`file://`) blockieren
@@ -195,6 +203,7 @@ Der aktuelle Stand bietet:
 - kombinierbare Filter: Person (Suchfeld), Ort, Jahr, Route, nur datierte Briefe
 - Routen-Bündelung, filterabhängige Heatmap, Zeit-Animation
 - Netzwerk-Ansicht der Korrespondenzen
+- historische Karten-Ebene (Güssefeld 1789, georeferenziert mit Allmaps)
 - Permalinks und CSV-Export
 
 Ideen für Erweiterungen:

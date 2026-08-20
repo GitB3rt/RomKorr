@@ -33,3 +33,6 @@ alt
 # Backups & Scraper-HTML-Cache
 backup/
 data/cache/
+
+# Große Kartenscans (Archivkopie; die Karte nutzt den Allmaps-Tileserver)
+screenshots/*.tif
