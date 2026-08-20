@@ -115,8 +115,9 @@ Diese Dateien bilden die **Grundlage aller weiteren Analysen und Visualisierunge
   - Jahr (von / bis), optional nur datierte Briefe
 - Darstellung von:
   - Korrespondenz-Routen (gebündelt; Liniendicke/Deckkraft = Briefanzahl, Klick zeigt Richtungs-Statistik)
-  - filterabhängiger Heatmap
-  - Hotspots
+  - filterabhängiger Heatmap (sequentielle Ein-Farbton-Rampe)
+  - Hotspots als Proportionalkreise (Kreisfläche und Zahl = Briefanzahl; benachbarte
+    Orte verschmelzen beim Herauszoomen und teilen sich per Klick)
   - Zeit-Animation (Jahres-Slider mit Play-Button, Einzeljahr oder kumulativ)
   - Netzwerk-Ansicht (wer schrieb wem, d3-force; Klick auf Person filtert die Karte)
   - Ergebnisliste mit Pagination
@@ -204,6 +205,8 @@ Der aktuelle Stand bietet:
 - Routen-Bündelung, filterabhängige Heatmap, Zeit-Animation
 - Netzwerk-Ansicht der Korrespondenzen
 - historische Karten-Ebene (Güssefeld 1789, georeferenziert mit Allmaps)
+- einheitliches, validiertes Farbschema „Tinte & Preußischblau" (lesbar auf
+  moderner wie historischer Karte, farbfehlsichtigkeits-geprüft)
 - Permalinks und CSV-Export
 
 Ideen für Erweiterungen:
