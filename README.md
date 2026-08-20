@@ -116,8 +116,13 @@ Diese Dateien bilden die **Grundlage aller weiteren Analysen und Visualisierunge
 - Darstellung von:
   - Korrespondenz-Routen (gebündelt; Liniendicke/Deckkraft = Briefanzahl, Klick zeigt Richtungs-Statistik)
   - filterabhängiger Heatmap (sequentielle Ein-Farbton-Rampe)
-  - Hotspots als Proportionalkreise (Kreisfläche und Zahl = Briefanzahl; benachbarte
-    Orte verschmelzen beim Herauszoomen und teilen sich per Klick)
+  - Hotspots als Proportionalkreise (Kreisfläche und Zahl = Briefanzahl im aktiven
+    Filter — Kreise wachsen, schrumpfen und verschwinden mit Person-/Ort-/Jahresfilter
+    und Zeit-Animation; benachbarte Orte verschmelzen beim Herauszoomen und teilen
+    sich per Klick). Auch die Orts-Popups (Anzahl, Beispiele, Listen-Button) werden
+    beim Öffnen aus dem aktiven Filter gebaut
+  - Briefe mit nur einem bekannten Ort (Gegenstelle „Unbekannt") zählen am bekannten
+    Endpunkt mit und erscheinen in Liste, CSV und Popups — nur ohne Linie
   - Zeit-Animation (Jahres-Slider mit Play-Button, Einzeljahr oder kumulativ)
   - Netzwerk-Ansicht (wer schrieb wem, d3-force; Klick auf Person filtert die Karte)
   - Ergebnisliste mit Pagination
