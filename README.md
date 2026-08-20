@@ -48,6 +48,10 @@ Das Projekt verfolgt drei Hauptziele:
 │ ├── romkorr_map.html # Aktuelle finale Karten-HTML
 │ └── alt/ # Frühere Karten-Versionen (nicht versioniert)
 │
+├── tools/ # Prüfwerkzeuge für die Georeferenzierung
+│ ├── check_gcps.py
+│ └── tps_fold.py
+│
 ├── backup/ # Manuelle Sicherungen (nicht versioniert)
 │
 └── requirements.txt # Python-Abhängigkeiten
@@ -129,9 +133,16 @@ Diese Dateien bilden die **Grundlage aller weiteren Analysen und Visualisierunge
 - Historische Karten-Ebene: F. L. Güssefeld, „Charte das Deutsche Reich" (Nürnberg 1789,
   Homännische Erben) als zuschaltbares Overlay über der modernen Karte — Punkte, Linien
   und Heatmap bleiben darüber sichtbar, die Deckkraft ist per Regler einstellbar.
-  Die Karten-ID stammt aus `data/raw/georef_map.json` (Allmaps-Georeferenzierungs-Annotation);
+  Die Karten-Referenz stammt aus `data/raw/georef_map.json` (Allmaps-Georeferenzierungs-Annotation);
   die Kacheln liefert der Allmaps-Tileserver live aus dem IIIF-Digitalisat der
   Princeton University Library — im Repo liegen keine Kartenbilder.
+  Entzerrt wird per **Thin Plate Spline** (`HIST_TRANSFORMATION`), damit das Blatt
+  exakt durch die Passpunkte läuft; die affine Alternative `polynomial` weicht am
+  Kartenrand um mehrere Dutzend Kilometer ab. Die Kachel-URL adressiert die
+  **versionierte** Map-Referenz (`<id>@<version>`), weil der Tileserver Kacheln pro
+  Map-ID 30 Tage cacht: Ohne Version kämen nach einer Korrektur im Allmaps-Editor
+  weiterhin veraltete Kacheln. Umgekehrt heißt das: Nach einer Editor-Änderung muss
+  `georef_map.json` neu geladen und die Karte neu gebaut werden.
 - CSV-Export der gefilterten Briefe (Excel-kompatibel, UTF-8-BOM)
 - Permalink: Filterzustand steht in der URL und ist als Link teilbar
 
@@ -142,6 +153,34 @@ outputs/romkorr_map.html
 
 
 Diese Datei kann direkt lokal geöffnet oder auf einer Website veröffentlicht werden.
+
+---
+
+## Prüfwerkzeuge für die Georeferenzierung (`tools/`)
+
+Zwei eigenständige Skripte prüfen die Allmaps-Annotation, bevor sie in die Karte geht.
+Ohne Argument nehmen sie `data/raw/georef_map.json`; beide melden Funde per Exit-Code 1.
+
+```bash
+python tools/tps_fold.py     # Faltungen der Thin Plate Spline finden
+python tools/check_gcps.py   # widersprüchliche Passpunkte finden
+```
+
+`tps_fold.py` rechnet die Transformation unabhängig vom Tileserver nach und sucht über
+die Jacobi-Determinante nach Stellen, an denen sich das Kartenblatt überschlägt — dort
+erscheint der Kartenstich verschmiert oder mit Löchern. Gemeldet wird der betroffene
+Bereich in Bild- und Weltkoordinaten.
+
+`check_gcps.py` sucht den Verursacher. Der aussagekräftigste Test ist der
+Nord/Süd-Vergleich: Liegt ein Passpunkt im Scan oberhalb seines Nachbarn, muss er
+auch nördlicher liegen — Verstöße sind fast immer Eingabefehler. Zusätzlich wird je
+Punkt eine Leave-one-out-Abweichung gegen die Nachbarschaft berechnet. Am Kartenrand
+sind große Werte dort normal, weil die Karte von 1789 selbst ungenau ist (Längengrade
+waren damals fehleranfällig, Randstaaten weniger sorgfältig konstruiert).
+
+Nützlich sind die Skripte besonders beim Wechsel auf Thin Plate Spline: Die affine
+Transformation mittelt einen falschen Passpunkt weg, TPS zwingt sich exakt durch ihn
+hindurch und faltet dabei die Umgebung.
 
 ---
 
