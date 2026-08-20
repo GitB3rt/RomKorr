@@ -1,0 +1,88 @@
+letter_id,role,place,geonames_url,gnd_url,lat,lon,source
+858,dispatch,Madras,,https://d-nb.info/gnd/4211415-9,13.087777,80.278333,gnd
+864,dispatch,Hamstede/Haamstede,,https://d-nb.info/gnd/7571874-1,,,none
+908,dispatch,Ansbach,,https://d-nb.info/gnd/4002170-1,49.304722,10.593055,gnd
+922,dispatch,"Komarno (Hirschberg, Riesengebirge)",,https://d-nb.info/gnd/4645972-8,,,none
+931,dispatch,"Komarno (Hirschberg, Riesengebirge)",,https://d-nb.info/gnd/4645972-8,,,none
+1372,dispatch,Ziebingen,,https://d-nb.info/gnd/5082991-9,,,none
+1378,dispatch,Ziebingen,,https://d-nb.info/gnd/5082991-9,,,none
+2098,dispatch,Altenkirchen (Landkreis Vorpommern-Rügen),,https://d-nb.info/gnd/4249382-1,54.63624,13.34332,gnd
+2099,dispatch,Altenkirchen (Landkreis Vorpommern-Rügen),,https://d-nb.info/gnd/4249382-1,54.63624,13.34332,gnd
+2100,dispatch,Wien,,https://d-nb.info/gnd/4066009-6,48.208199,16.37169,gnd
+2562,dispatch,Leiden,,https://d-nb.info/gnd/4074118-7,52.158329,4.493059,gnd
+2563,dispatch,Leiden,,https://d-nb.info/gnd/4074118-7,52.158329,4.493059,gnd
+3239,dispatch,Zwolle,,https://d-nb.info/gnd/4119274-6,52.5125,6.094439,gnd
+3253,dispatch,Fehrbellin-Lentzke,,https://d-nb.info/gnd/10121950-7,,,none
+3254,dispatch,Fehrbellin-Lentzke,,https://d-nb.info/gnd/10121950-7,,,none
+3386,dispatch,Kassel,,https://d-nb.info/gnd/4029869-3,51.316666,9.5,gnd
+3746,dispatch,Leiden,,https://d-nb.info/gnd/4074118-7,52.158329,4.493059,gnd
+3747,dispatch,Leiden,,https://d-nb.info/gnd/4074118-7,52.158329,4.493059,gnd
+3825,dispatch,Kopenhagen,,https://d-nb.info/gnd/4032399-7,55.675939,12.56553,gnd
+3970,dispatch,Schnepfenthal,,https://d-nb.info/gnd/2113072-3,50.883333,10.566666,gnd
+4159,dispatch,London,,https://d-nb.info/gnd/4074335-4,51.50853,-0.12574,gnd
+4160,dispatch,London,,https://d-nb.info/gnd/4074335-4,51.50853,-0.12574,gnd
+4231,dispatch,Moringen,,https://d-nb.info/gnd/4040265-4,51.699159,9.871069,gnd
+4232,dispatch,Moringen,,https://d-nb.info/gnd/4040265-4,51.699159,9.871069,gnd
+4266,dispatch,Moringen,,https://d-nb.info/gnd/4040265-4,51.699159,9.871069,gnd
+4774,dispatch,Schloss Siebeneichen (Meißen),,https://d-nb.info/gnd/1147408807,,,none
+5033,dispatch,Goslar,,https://d-nb.info/gnd/4021643-3,51.904249,10.427659,gnd
+5374,dispatch,"Steinau, Oder",,https://d-nb.info/gnd/2084741-5,,,none
+5375,dispatch,"Steinau, Oder",,https://d-nb.info/gnd/2084741-5,,,none
+5753,dispatch,Baden-Baden,,https://d-nb.info/gnd/4004169-4,48.760555,8.239722,gnd
+5785,dispatch,Piercefield House (Chepstow),,https://d-nb.info/gnd/4090357-6,,,none
+5786,dispatch,Piercefield House (Chepstow),,https://d-nb.info/gnd/4090357-6,,,none
+5882,dispatch,Wolfenbüttel,,https://d-nb.info/gnd/2026423-9,52.164419,10.54095,gnd
+7868,dispatch,"Steinau, Oder",,https://d-nb.info/gnd/2084741-5,,,none
+7869,dispatch,"Steinau, Oder",,https://d-nb.info/gnd/2084741-5,,,none
+7870,dispatch,"Steinau, Oder",,https://d-nb.info/gnd/2084741-5,,,none
+7871,dispatch,"Steinau, Oder",,https://d-nb.info/gnd/2084741-5,,,none
+7872,dispatch,"Steinau, Oder",,https://d-nb.info/gnd/2084741-5,,,none
+7873,dispatch,"Steinau, Oder",,https://d-nb.info/gnd/2084741-5,,,none
+7894,dispatch,"Steinau, Oder",,https://d-nb.info/gnd/2084741-5,,,none
+16854,dispatch,Burg Königstein (Königstein im Taunus),,https://d-nb.info/gnd/1051036402,,,none
+16967,dispatch,Ziebingen,,https://d-nb.info/gnd/5082991-9,,,none
+16988,dispatch,Coburg,,https://d-nb.info/gnd/4010325-0,50.259166,10.963611,gnd
+17030,dispatch,"Komarno (Hirschberg, Riesengebirge)",,https://d-nb.info/gnd/4645972-8,,,none
+17049,dispatch,Fehrbellin-Lentzke,,https://d-nb.info/gnd/10121950-7,,,none
+17080,dispatch,Wien,,https://d-nb.info/gnd/4066009-6,48.208199,16.37169,gnd
+17104,dispatch,Bad Arolsen,,https://d-nb.info/gnd/4003019-2,51.379722,9.014444,gnd
+17125,dispatch,"Oberweimar (Weimar, Lahn)",,https://d-nb.info/gnd/7620972-6,50.756111,8.701111,gnd
+17191,dispatch,Fehrbellin-Lentzke,,https://d-nb.info/gnd/10121950-7,,,none
+17192,dispatch,Fehrbellin-Lentzke,,https://d-nb.info/gnd/10121950-7,,,none
+18427,dispatch,Wien,,https://d-nb.info/gnd/4066009-6,48.208199,16.37169,gnd
+18429,dispatch,Fehrbellin-Lentzke,,https://d-nb.info/gnd/10121950-7,,,none
+18430,dispatch,Wien,,https://d-nb.info/gnd/4066009-6,48.208199,16.37169,gnd
+18527,dispatch,Auerstedt,,https://d-nb.info/gnd/4079866-5,51.099722,11.589166,gnd
+18550,dispatch,Eisenach,,https://d-nb.info/gnd/2009365-2,50.980699,10.31522,gnd
+18551,dispatch,Eisenach,,https://d-nb.info/gnd/2009365-2,50.980699,10.31522,gnd
+18952,dispatch,Les Ormes,,,,,none
+19635,dispatch,Neapel,,https://d-nb.info/gnd/4041476-0,40.833329,14.25,gnd
+19662,dispatch,Straßburg,,https://d-nb.info/gnd/4057878-1,48.583888,7.745277,gnd
+19667,dispatch,Vaumarcus,,https://d-nb.info/gnd/4663895-7,,,none
+19677,dispatch,Neuenburg (Schweiz),,https://d-nb.info/gnd/4075303-7,46.991666,6.930833,gnd
+19680,dispatch,Neuenburg (Schweiz),,https://d-nb.info/gnd/4075303-7,46.991666,6.930833,gnd
+19688,dispatch,Neuenburg (Schweiz),,https://d-nb.info/gnd/4075303-7,46.991666,6.930833,gnd
+940,destination,Heidelberg,,https://d-nb.info/gnd/4023996-2,49.407679,8.690789,gnd
+1368,destination,Ziebingen,,https://d-nb.info/gnd/5082991-9,,,none
+1369,destination,Ziebingen,,https://d-nb.info/gnd/5082991-9,,,none
+1376,destination,Ziebingen,,https://d-nb.info/gnd/5082991-9,,,none
+1380,destination,Ziebingen,,https://d-nb.info/gnd/5082991-9,,,none
+2770,destination,Tharandt,,https://d-nb.info/gnd/4106217-6,50.98525,13.580349,gnd
+7599,destination,Fehrbellin-Lentzke,,https://d-nb.info/gnd/10121950-7,,,none
+7600,destination,Fehrbellin-Lentzke,,https://d-nb.info/gnd/10121950-7,,,none
+12782,destination,Piercefield House (Chepstow),,https://d-nb.info/gnd/4090357-6,,,none
+16815,destination,London,,https://d-nb.info/gnd/4074335-4,51.50853,-0.12574,gnd
+16895,destination,Leiden,,https://d-nb.info/gnd/4074118-7,52.158329,4.493059,gnd
+16898,destination,Leiden,,https://d-nb.info/gnd/4074118-7,52.158329,4.493059,gnd
+16995,destination,"Steinau, Oder",,https://d-nb.info/gnd/2084741-5,,,none
+17048,destination,Fehrbellin-Lentzke,,https://d-nb.info/gnd/10121950-7,,,none
+17058,destination,Arnstadt,,https://d-nb.info/gnd/4003011-8,50.840479,10.95198,gnd
+17069,destination,Fehrbellin-Lentzke,,https://d-nb.info/gnd/10121950-7,,,none
+17081,destination,Wien,,https://d-nb.info/gnd/4066009-6,48.208199,16.37169,gnd
+18425,destination,Wien,,https://d-nb.info/gnd/4066009-6,48.208199,16.37169,gnd
+18526,destination,Auerstedt,,https://d-nb.info/gnd/4079866-5,51.099722,11.589166,gnd
+18528,destination,Auerstedt,,https://d-nb.info/gnd/4079866-5,51.099722,11.589166,gnd
+18556,destination,Plugawice,,,,,none
+18953,destination,Les Ormes,,,,,none
+19681,destination,Neuenburg (Schweiz),,https://d-nb.info/gnd/4075303-7,46.991666,6.930833,gnd
+19683,destination,Neuenburg (Schweiz),,https://d-nb.info/gnd/4075303-7,46.991666,6.930833,gnd

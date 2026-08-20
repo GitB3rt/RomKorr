@@ -70,7 +70,8 @@ Die Notebooks sind nummeriert und werden **in dieser Reihenfolge** ausgeführt.
 **Zweck**
 - Sammlung bzw. Import von Briefmetadaten
 - Vereinheitlichung von Personen- und Datumsangaben
-- Erfassung von Quell-URLs
+- Erfassung von Quell-URLs sowie der **Normdaten-Links je Ort** (GeoNames **und** GND),
+  wie sie die Briefseiten selbst verlinken
 
 **Ergebnis**
 - Rohdaten (CSV) in `data/raw/`
@@ -85,8 +86,12 @@ Dieses Notebook muss nur neu ausgeführt werden, wenn sich die Quelldaten änder
 
 **Zweck**
 - Bereinigung und Normalisierung der Rohdaten
-- Geokodierung von Absende- und Empfangsorten
-- Vereinheitlichung von Ortsnamen
+- Koordinaten primär aus **Normdaten** (Kaskade: GeoNames-Link → GND via lobid.org);
+  Namens-Geocoding nur als dokumentierter Fallback — unaufgelöste Fälle werden geloggt.
+  Ergebnisse gecacht in `data/raw/normdata_fixes.csv` (dort sind auch manuelle
+  Korrekturen möglich: `lat`/`lon` eintragen, Quelle vermerken, 02 neu ausführen)
+- „Unbekannt" als Ortsname erhält keine Koordinaten
+- Vereinheitlichung von Ortsnamen und Harmonisierung abweichender Koordinaten
 - Erzeugung einer konsistenten Master-Datei
 
 **Ergebnis**
@@ -185,7 +190,8 @@ pip install -r requirements.txt
 
 Der aktuelle Stand bietet:
 
-- stabilen, reproduzierbaren Workflow (inkl. Harmonisierung fehlerhafter Geokodierungen)
+- stabilen, reproduzierbaren Workflow (Koordinaten aus Normdaten GeoNames/GND
+  statt blindem Geocoding; inkl. Harmonisierung fehlerhafter Geokodierungen)
 - kombinierbare Filter: Person (Suchfeld), Ort, Jahr, Route, nur datierte Briefe
 - Routen-Bündelung, filterabhängige Heatmap, Zeit-Animation
 - Netzwerk-Ansicht der Korrespondenzen
