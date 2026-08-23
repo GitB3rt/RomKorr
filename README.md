@@ -73,13 +73,22 @@ Die Notebooks sind nummeriert und werden **in dieser Reihenfolge** ausgeführt.
 
 **Zweck**
 - Sammlung bzw. Import von Briefmetadaten
-- Vereinheitlichung von Personen- und Datumsangaben
+- Die zu prüfenden IDs kommen aus der **`sitemap.xml`** der Edition (statt einen
+  ID-Bereich zu raten); ergänzt um die IDs des letzten Laufs, weil die Sitemap
+  vereinzelt Briefe auslässt
 - Erfassung von Quell-URLs sowie der **Normdaten-Links je Ort** (GeoNames **und** GND),
   wie sie die Briefseiten selbst verlinken
+- Zusätzlich wird die **TEI-Fassung** jedes Briefes geladen
+  (`/letters/xml/<id>`): Sie enthält das Datum maschinenlesbar als `@when` —
+  auch bei unscharfen Angaben wie „[vor dem 22.04.1790]" oder „Sommer 1793".
+  Gelesen wird gezielt `<correspAction type="sent">`, denn der TEI-Header trägt
+  unter `<publicationStmt>` ein zweites Datum (das der Veröffentlichung)
+- Die Metadaten-Labels der Website werden **deutsch und englisch** erkannt; die
+  Edition liefert beide Sprachfassungen gemischt aus
 
 **Ergebnis**
-- Rohdaten (CSV) in `data/raw/`
-- Noch keine Geokoordinaten
+- Rohdaten (CSV) in `data/raw/`, gefiltert in `data/processed/rom_korr_full_website.csv`
+- Noch keine Geokoordinaten (die entstehen in 02 aus den Normdaten-Links)
 
 Dieses Notebook muss nur neu ausgeführt werden, wenn sich die Quelldaten ändern.
 
