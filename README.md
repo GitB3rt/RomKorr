@@ -99,10 +99,15 @@ Dieses Notebook muss nur neu ausgeführt werden, wenn sich die Quelldaten änder
 
 **Zweck**
 - Bereinigung und Normalisierung der Rohdaten
-- Koordinaten primär aus **Normdaten** (Kaskade: GeoNames-Link → GND via lobid.org);
-  Namens-Geocoding nur als dokumentierter Fallback — unaufgelöste Fälle werden geloggt.
-  Ergebnisse gecacht in `data/raw/normdata_fixes.csv` (dort sind auch manuelle
-  Korrekturen möglich: `lat`/`lon` eintragen, Quelle vermerken, 02 neu ausführen)
+- **Datum** primär aus dem TEI (`@when`), der Prosa-Parser nur als Rückfall.
+  Erschlossene Datierungen werden als `date_inferred` gekennzeichnet, damit die
+  Karte sie nicht als taggenau ausgibt
+- Koordinaten **je Ort** aus **Normdaten** (Kaskade: GeoNames-Link → GND via
+  lobid.org), festgehalten in `data/raw/place_coords.csv`. Was dort steht, wird
+  nicht erneut geholt; dort sind auch manuelle Korrekturen möglich (`lat`/`lon`
+  eintragen, Quelle `manuell` vermerken). Zugeordnet wird über GeoNames-URL, sonst
+  GND-URL, sonst Ortsname — Letzteres nur bei eindeutigen Namen, damit gleichnamige
+  Orte unterscheidbar bleiben
 - „Unbekannt" als Ortsname erhält keine Koordinaten
 - Vereinheitlichung von Ortsnamen und Harmonisierung abweichender Koordinaten
 - Erzeugung einer konsistenten Master-Datei
