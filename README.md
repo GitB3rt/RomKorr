@@ -128,12 +128,19 @@ Diese Dateien bilden die **Grundlage aller weiteren Analysen und Visualisierunge
 - Erzeugung der interaktiven Karte mit **Folium und JavaScript**
 - Aufbau der Benutzeroberfläche (Sidebar)
 - Filter nach:
-  - Person (Suchfeld über alle Personen, findet auch Teilnamen wie „Schlegel")
-  - Ort (Dropdown passt sich den übrigen Filtern dynamisch an)
+  - Person (Suchfeld über alle Personen, findet auch Teilnamen wie „Schlegel"),
+    wahlweise eingeschränkt auf ihre Rolle als Absender oder Empfänger
+  - zweite Person (optional): zeigt nur die Briefe zwischen beiden; zusammen mit
+    der Richtungswahl also gezielt „A schreibt an B"
+  - Ort (Dropdown passt sich den übrigen Filtern dynamisch an); der gewählte Ort
+    wird angefahren und farbig hervorgehoben — auch dann, wenn er noch in einem
+    Cluster steckt
   - Jahr (von / bis), optional nur belegte Datierungen (schließt erschlossene aus)
 - Darstellung von:
   - Korrespondenz-Routen (gebündelt; Liniendicke/Deckkraft = Briefanzahl, Klick zeigt Richtungs-Statistik)
-  - filterabhängiger Heatmap (sequentielle Ein-Farbton-Rampe)
+  - filterabhängiger Heatmap in zwei Farbvarianten, im Ebenen-Menü einzeln wählbar:
+    „blau" (sequentielle Ein-Farbton-Rampe, fügt sich ins Farbschema und bleibt über
+    der historischen Karte lesbar) und „farbig" (klassischer Verlauf blau→grün→rot)
   - Hotspots als Proportionalkreise (Kreisfläche und Zahl = Briefanzahl im aktiven
     Filter — Kreise wachsen, schrumpfen und verschwinden mit Person-/Ort-/Jahresfilter
     und Zeit-Animation; benachbarte Orte verschmelzen beim Herauszoomen und teilen
