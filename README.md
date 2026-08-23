@@ -130,7 +130,7 @@ Diese Dateien bilden die **Grundlage aller weiteren Analysen und Visualisierunge
 - Filter nach:
   - Person (Suchfeld über alle Personen, findet auch Teilnamen wie „Schlegel")
   - Ort (Dropdown passt sich den übrigen Filtern dynamisch an)
-  - Jahr (von / bis), optional nur datierte Briefe
+  - Jahr (von / bis), optional nur belegte Datierungen (schließt erschlossene aus)
 - Darstellung von:
   - Korrespondenz-Routen (gebündelt; Liniendicke/Deckkraft = Briefanzahl, Klick zeigt Richtungs-Statistik)
   - filterabhängiger Heatmap (sequentielle Ein-Farbton-Rampe)
@@ -141,6 +141,9 @@ Diese Dateien bilden die **Grundlage aller weiteren Analysen und Visualisierunge
     beim Öffnen aus dem aktiven Filter gebaut
   - Briefe mit nur einem bekannten Ort (Gegenstelle „Unbekannt") zählen am bekannten
     Endpunkt mit und erscheinen in Liste, CSV und Popups — nur ohne Linie
+  - **Erschlossene Datierungen** sind mit „≈" gekennzeichnet; der Wortlaut der Edition
+    (z. B. „[vor dem 22.04.1790]") erscheint im Tooltip und im CSV-Export. Ohne „≈" ist
+    das Datum im Brief selbst belegt
   - Zeit-Animation (Jahres-Slider mit Play-Button, Einzeljahr oder kumulativ)
   - Netzwerk-Ansicht (wer schrieb wem, d3-force; Klick auf Person filtert die Karte)
   - Ergebnisliste mit Pagination
@@ -259,7 +262,7 @@ Der aktuelle Stand bietet:
 
 - stabilen, reproduzierbaren Workflow (Koordinaten aus Normdaten GeoNames/GND
   statt blindem Geocoding; inkl. Harmonisierung fehlerhafter Geokodierungen)
-- kombinierbare Filter: Person (Suchfeld), Ort, Jahr, Route, nur datierte Briefe
+- kombinierbare Filter: Person (Suchfeld), Ort, Jahr, Route, nur belegte Datierungen
 - Routen-Bündelung, filterabhängige Heatmap, Zeit-Animation
 - Netzwerk-Ansicht der Korrespondenzen
 - historische Karten-Ebene (Güssefeld 1789, georeferenziert mit Allmaps)
