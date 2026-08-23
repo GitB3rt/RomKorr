@@ -108,6 +108,8 @@ Dieses Notebook muss nur neu ausgeführt werden, wenn sich die Quelldaten änder
   eintragen, Quelle `manuell` vermerken). Zugeordnet wird über GeoNames-URL, sonst
   GND-URL, sonst Ortsname — Letzteres nur bei eindeutigen Namen, damit gleichnamige
   Orte unterscheidbar bleiben
+- Erschlossene **Orte** werden aus der Anmerkung der Edition erkannt (`dispatch_inferred`, `destination_inferred`) — die Orte gelten als gültig,
+  die Unsicherheit wird aber mitgeführt
 - „Unbekannt" als Ortsname erhält keine Koordinaten
 - Vereinheitlichung von Ortsnamen und Harmonisierung abweichender Koordinaten
 - Erzeugung einer konsistenten Master-Datei
@@ -153,6 +155,12 @@ Diese Dateien bilden die **Grundlage aller weiteren Analysen und Visualisierunge
     das Datum im Brief selbst belegt
   - Zeit-Animation (Jahres-Slider mit Play-Button, Einzeljahr oder kumulativ)
   - Netzwerk-Ansicht (wer schrieb wem, d3-force; Klick auf Person filtert die Karte)
+  - **Lebenswege (Beta)**: eigene Ansicht, die eine Person über ihre Aufenthaltsorte durch die
+    Zeit verfolgt. Aufenthaltsbelege sind Absendeorte (stark) und Empfangsorte (schwächer,
+    abschaltbar); aufeinanderfolgende Belege am selben Ort werden zu Stationen zusammengefasst,
+    ein Regler springt von Station zu Station. Zwei Personen lassen sich vergleichen.
+    Erschlossene Orte und Daten sind gestrichelt gezeichnet. Läuft auf einer eigenen
+    Karteninstanz, damit die Hauptkarte unberührt bleibt
   - Ergebnisliste mit Pagination
 - Historische Karten-Ebene: F. L. Güssefeld, „Charte das Deutsche Reich" (Nürnberg 1789,
   Homännische Erben) als zuschaltbares Overlay über der modernen Karte — Punkte, Linien
