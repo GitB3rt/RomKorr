@@ -140,9 +140,7 @@ Diese Dateien bilden die **Grundlage aller weiteren Analysen und Visualisierunge
   - Jahr (von / bis), optional nur belegte Datierungen (schließt erschlossene aus)
 - Darstellung von:
   - Korrespondenz-Routen (gebündelt; Liniendicke/Deckkraft = Briefanzahl, Klick zeigt Richtungs-Statistik)
-  - filterabhängiger Heatmap in zwei Farbvarianten, im Ebenen-Menü einzeln wählbar:
-    „blau" (sequentielle Ein-Farbton-Rampe, fügt sich ins Farbschema und bleibt über
-    der historischen Karte lesbar) und „farbig" (klassischer Verlauf blau→grün→rot)
+  - filterabhängige Heatmap (Verlauf blau→grün→rot), im Ebenen-Menü zuschaltbar
   - Hotspots als Proportionalkreise (Kreisfläche und Zahl = Briefanzahl im aktiven
     Filter — Kreise wachsen, schrumpfen und verschwinden mit Person-/Ort-/Jahresfilter
     und Zeit-Animation; benachbarte Orte verschmelzen beim Herauszoomen und teilen
@@ -256,16 +254,14 @@ pip install -r requirements.txt
   `outputs/romkorr_map.html` kann direkt auf einen Webspace hochgeladen werden.
 - Es werden keine personenbezogenen Daten von Besuchern verarbeitet.
 - Externe Inhalte (werden beim Öffnen aus dem Internet geladen):
-  - OpenStreetMap-Kacheln / Leaflet (Standard-Basiskarte)
-  - CARTO (alternative helle Basiskarte, im LayerControl wählbar)
+  - Esri „World Light Gray" (helle Basiskarte) / Leaflet — bewusst nicht CARTO:
+    deren anonyme Kacheln tragen seit Kurzem ein „API KEY REQUIRED"-Wasserzeichen
   - Allmaps-Tileserver (`allmaps.xyz`) — Kacheln der historischen Karte
     (Güssefeld 1789; Digitalisat: Princeton University Library, per IIIF)
   - d3.js via jsDelivr-CDN (nur für die Netzwerk-Ansicht)
   - Verlinkungen auf öffentlich zugängliche Briefquellen (briefe-der-romantik.de)
-- **Hinweis lokales Öffnen:** Beim Öffnen per Doppelklick (`file://`) blockieren
-  die OSM-Server die Kacheln teilweise (fehlender Referer) — dann im LayerControl
-  auf „CartoDB Positron" umschalten. Auf einer gehosteten Website tritt das
-  Problem nicht auf.
+- Die Karte startet bewusst ruhig: Hotspots und Heatmap sind zunächst aus und
+  werden oben rechts zugeschaltet.
 - Bei Veröffentlichung sollte die Datenschutzerklärung auf externe Kartendienste,
   CDN-Einbindung und ausgehende Links hinweisen.
 
