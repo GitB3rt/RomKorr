@@ -10,6 +10,17 @@ Die Karte eignet sich für **Exploration der Briefe**, **Forschung**, **Lehre** 
 
 ---
 
+## Ansichten
+
+| | |
+|---|---|
+| ![Startansicht](screenshots/full_map.png) **Start:** Routen zwischen Absende- und Empfangsort; Filter und Trefferliste links, Ebenen rechts. | ![Personenfilter](screenshots/filter_example_Schleiermacher.png) **Personenfilter:** alle Briefe von und an Schleiermacher, mit Hotspots. |
+| ![Heatmap](screenshots/Heatmap.png) **Heatmap:** Dichte der Brieforte, folgt den Filtern. | ![Historische Karte 1789](screenshots/historische_karte_1789.png) **Historische Karte:** Güssefeld 1789, georeferenziert mit Allmaps. |
+| ![Territorien 1783](screenshots/territorien_1783.png) **Territorien:** Grenzverläufe um 1783 bzw. 1800 als eigene Ebenen. | ![Netzwerk](screenshots/netzwerk.png) **Netzwerk:** wer schrieb wem — Klick auf eine Person filtert die Karte. |
+| ![Lebenswege](screenshots/lebenswege.png) **Lebenswege (Beta):** eine Person über ihre Aufenthaltsorte durch die Zeit. | ![Erwähnte Orte](screenshots/erwaehnte_orte.png) **Erwähnte Orte (Beta):** worüber geschrieben wurde — orange heißt: besprochen, aber ohne Briefverkehr. |
+
+---
+
 ## Projektidee
 
 Das Projekt verfolgt drei Hauptziele:
@@ -32,7 +43,12 @@ Das Projekt verfolgt drei Hauptziele:
 
 │
 ├── data/
-│ ├── raw/ # Rohdaten (externe Quellen, unverändert)
+│ ├── raw/ # Rohdaten und Nachschlagewerke
+│ │ ├── place_coords.csv # Ortsverzeichnis (Koordinaten aus Normdaten)
+│ │ ├── mentions.csv # im Brieftext erwähnte Orte je Brief
+│ │ ├── borders_1783.geojson # historische Territorien (zugeschnitten)
+│ │ ├── borders_1800.geojson
+│ │ └── georef_map.json # Allmaps-Annotation der Karte von 1789
 │ └── processed/ # Aufbereitete Daten (zentrale Arbeitsbasis)
 │ ├── letters_master.csv
 │ ├── letters_master.parquet
@@ -51,7 +67,10 @@ Das Projekt verfolgt drei Hauptziele:
 ├── tools/ # Hilfsskripte
 │ ├── check_gcps.py # Passpunkte der Georeferenzierung prüfen
 │ ├── tps_fold.py # Faltungen der Georeferenzierung finden
-│ └── prepare_borders.py # historische Territorialgrenzen aufbereiten
+│ ├── prepare_borders.py # historische Territorialgrenzen aufbereiten
+│ └── prepare_mentions.py # erwähnte Orte aus dem Register lesen
+│
+├── screenshots/ # Ansichten der Karte (Dokumentation)
 │
 ├── backup/ # Manuelle Sicherungen (nicht versioniert)
 │
@@ -90,6 +109,14 @@ Die Notebooks sind nummeriert und werden **in dieser Reihenfolge** ausgeführt.
 **Ergebnis**
 - Rohdaten (CSV) in `data/raw/`, gefiltert in `data/processed/rom_korr_full_website.csv`
 - Noch keine Geokoordinaten (die entstehen in 02 aus den Normdaten-Links)
+
+**Seiten-Cache**
+Jede Briefseite und jede TEI-Datei wird lokal abgelegt, damit ein abgebrochener Lauf
+ohne neue Abrufe weitergehen kann — rund 10.000 Dateien. Der Cache liegt bewusst
+**außerhalb** des Projektordners, weil dieser hier in einem synchronisierten Laufwerk
+liegt; voreingestellt ist `%LOCALAPPDATA%\romkorr_scrape_cache` (unter Linux/macOS
+`~/.cache/romkorr`). Mit der Umgebungsvariablen `ROMKORR_CACHE` lässt sich ein anderer
+Ort vorgeben; `tools/prepare_mentions.py` liest denselben Cache.
 
 Dieses Notebook muss nur neu ausgeführt werden, wenn sich die Quelldaten ändern.
 
@@ -142,10 +169,12 @@ Diese Dateien bilden die **Grundlage aller weiteren Analysen und Visualisierunge
 - Darstellung von:
   - Korrespondenz-Routen (gebündelt; Liniendicke/Deckkraft = Briefanzahl, Klick zeigt Richtungs-Statistik)
   - filterabhängige Heatmap (Verlauf blau→grün→rot), im Ebenen-Menü zuschaltbar
-  - **Territorien um 1800** als zuschaltbare Ebene: 50 Gebiete mit Namen, aus dem
+  - **Territorien 1783 und 1800** als zuschaltbare Ebenen (53 bzw. 50 Gebiete mit Namen), aus dem
     Datensatz [historical-basemaps](https://github.com/aourednik/historical-basemaps)
-    (GPL-3.0). Gewählt ist das Stützjahr 1800 — der Bestand hat seinen Median 1798,
-    77 % der Briefe stammen aus 1795 oder später. Aufbereitet von
+    (GPL-3.0). Zwei Stützjahre, weil beide etwas anderes zeigen: **1783** liegt nahe an
+    der Güssefeld-Karte von 1789 und kennt noch Polen, die Niederlande und die Alte
+    Eidgenossenschaft; **1800** liegt näher am Schwerpunkt des Bestands (Median 1798,
+    77 % ab 1795) und zeigt Batavische und Helvetische Republik. Aufbereitet von
     `tools/prepare_borders.py`; Beschriftungen erscheinen zoomabhängig, damit
     Kleinstaaten die Übersicht nicht zustellen
   - Hotspots als Proportionalkreise (Kreisfläche und Zahl = Briefanzahl im aktiven
@@ -166,6 +195,12 @@ Diese Dateien bilden die **Grundlage aller weiteren Analysen und Visualisierunge
     ein Regler springt von Station zu Station. Zwei Personen lassen sich vergleichen.
     Erschlossene Orte und Daten sind gestrichelt gezeichnet. Läuft auf einer eigenen
     Karteninstanz, damit die Hauptkarte unberührt bleibt
+  - **Erwähnte Orte (Beta)**: eigene Ansicht der „Gesprächsgeografie" — nicht wohin Briefe
+    liefen, sondern worüber in ihnen gesprochen wurde. Grundlage ist das Ortsregister der
+    Edition (`tools/prepare_mentions.py`, gelesen aus dem lokalen Seiten-Cache). Kreisgröße =
+    Zahl der Erwähnungen, Farbe = Verhältnis zwischen Erwähnung und Briefverkehr auf einer
+    zweipoligen Skala (blau: vor allem Poststation, orange: wird besprochen, ohne dass Post
+    dorthin ging). 401 Orte, davon 261 ohne eigenen Briefverkehr
   - Ergebnisliste mit Pagination
 - Historische Karten-Ebene: F. L. Güssefeld, „Charte das Deutsche Reich" (Nürnberg 1789,
   Homännische Erben) als zuschaltbares Overlay über der modernen Karte — Punkte, Linien
@@ -218,6 +253,30 @@ waren damals fehleranfällig, Randstaaten weniger sorgfältig konstruiert).
 Nützlich sind die Skripte besonders beim Wechsel auf Thin Plate Spline: Die affine
 Transformation mittelt einen falschen Passpunkt weg, TPS zwingt sich exakt durch ihn
 hindurch und faltet dabei die Umgebung.
+
+---
+
+## Datenhilfen (`tools/`)
+
+Zwei weitere Skripte erzeugen Zusatzdaten für die Karte. Beide laufen selten — nur,
+wenn die Grundlage sich ändert — und schreiben nach `data/raw/`.
+
+```bash
+python tools/prepare_borders.py          # beide Stützjahre; oder: ... 1800
+python tools/prepare_mentions.py         # optional: Pfad zum Seiten-Cache
+```
+
+`prepare_borders.py` lädt die Weltdatei des Datensatzes
+[historical-basemaps](https://github.com/aourednik/historical-basemaps) (GPL-3.0),
+schneidet sie mit Sutherland-Hodgman auf den Briefraum zu, führt gleichnamige Gebiete
+zusammen und berechnet je Gebiet einen Beschriftungspunkt samt Mindest-Zoomstufe.
+Der Zuschnitt spart den größten Teil der 1,8 MB; eine Geometrie-Bibliothek ist nicht nötig.
+
+`prepare_mentions.py` liest das Ortsregister der Briefseiten aus dem Seiten-Cache von
+Notebook 01 (s. u.) und schreibt `data/raw/mentions.csv`. Die Register-Einträge tragen
+GND- und GeoNames-Nummern, sodass die Koordinaten über dieselbe Kaskade wie in Notebook 02
+aufgelöst und in `place_coords.csv` ergänzt werden. Nur für noch unbekannte Orte geht
+eine Anfrage hinaus; an die Edition selbst geht keine.
 
 ---
 
@@ -281,10 +340,15 @@ Der aktuelle Stand bietet:
 
 - stabilen, reproduzierbaren Workflow (Koordinaten aus Normdaten GeoNames/GND
   statt blindem Geocoding; inkl. Harmonisierung fehlerhafter Geokodierungen)
-- kombinierbare Filter: Person (Suchfeld), Ort, Jahr, Route, nur belegte Datierungen
-- Routen-Bündelung, filterabhängige Heatmap, Zeit-Animation
+- Datierung aus dem TEI (`@when`), erschlossene Angaben als solche gekennzeichnet
+- kombinierbare Filter: Person (Suchfeld), zweite Person, Richtung, Ort, Jahr,
+  Route, nur belegte Datierungen
+- Routen-Bündelung, filterabhängige Heatmap und Hotspots, Zeit-Animation
 - Netzwerk-Ansicht der Korrespondenzen
-- historische Karten-Ebene (Güssefeld 1789, georeferenziert mit Allmaps)
+- Lebenswege und erwähnte Orte als eigene Beta-Ansichten
+- historische Karten-Ebene (Güssefeld 1789, georeferenziert mit Allmaps) sowie
+  Territorien um 1783 und 1800
+- zwei Basiskarten zur Wahl (Esri hell voreingestellt, OpenStreetMap detailliert)
 - einheitliches, validiertes Farbschema „Tinte & Preußischblau" (lesbar auf
   moderner wie historischer Karte, farbfehlsichtigkeits-geprüft)
 - Permalinks und CSV-Export
