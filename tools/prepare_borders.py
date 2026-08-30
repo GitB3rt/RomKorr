@@ -1,28 +1,34 @@
 """Bereitet die historischen Territorialgrenzen für die Karte auf.
 
-Quelle: https://github.com/aourednik/historical-basemaps (GPL-3.0), Datei
-`world_1800.geojson`. Von den verfügbaren Stützjahren (1783, 1800, 1815) passt
-1800 am besten: Der Briefbestand hat seinen Median 1798, 77 % der Briefe
-stammen aus 1795 oder später. Polen fehlt dort zu Recht — es war 1795 geteilt
-worden; die Batavische und die Helvetische Republik entsprechen dem Stand, den
-die späteren Briefe vorfanden.
+Quelle: https://github.com/aourednik/historical-basemaps (GPL-3.0).
+Aufbereitet werden zwei Stützjahre, weil beide etwas anderes zeigen:
+
+- **1783** liegt nahe an der historischen Karte von Güssefeld (1789) und kennt
+  noch Polen, die Niederlande und die Alte Eidgenossenschaft.
+- **1800** liegt näher am Schwerpunkt des Briefbestands (Median 1798, 77 % der
+  Briefe ab 1795) und zeigt die Batavische und die Helvetische Republik;
+  Polen fehlt dort zu Recht, es war 1795 geteilt worden.
 
 Das Skript lädt die Weltdatei, schneidet sie auf den Briefraum zu, rundet die
-Koordinaten und schreibt `data/raw/borders_1800.geojson`. Der Zuschnitt spart
+Koordinaten und schreibt je Jahr `data/raw/borders_<jahr>.geojson`. Der Zuschnitt spart
 den größten Teil der 1,8 MB; gerechnet wird mit Sutherland-Hodgman, damit keine
 Geometrie-Bibliothek nötig ist.
 
 Aufruf:
-    python tools/prepare_borders.py
+    python tools/prepare_borders.py            # beide Jahre
+    python tools/prepare_borders.py 1800       # nur eines
 """
 from __future__ import annotations
 
 import json
+import sys
 import urllib.request
 from pathlib import Path
 
-QUELLE = ("https://raw.githubusercontent.com/aourednik/historical-basemaps/"
-          "master/geojson/world_1800.geojson")
+BASIS = ("https://raw.githubusercontent.com/aourednik/historical-basemaps/"
+         "master/geojson/world_{jahr}.geojson")
+JAHRE = (1783, 1800)     # 1783 liegt nahe an der Guessefeld-Karte von 1789,
+                         # 1800 naeher am Schwerpunkt des Briefbestands
 
 # Briefraum mit Rand: die Orte liegen (ohne Madras) zwischen -2,7 und 26 Grad
 # Länge sowie 40,8 und 58 Grad Breite.
@@ -107,12 +113,12 @@ def polygone(geom: dict) -> list:
     return []
 
 
-def main() -> None:
-    root = find_project_root(Path(__file__).resolve())
-    ziel = root / "data" / "raw" / "borders_1800.geojson"
+def aufbereiten(jahr: int, root: Path) -> None:
+    quelle = BASIS.format(jahr=jahr)
+    ziel = root / "data" / "raw" / f"borders_{jahr}.geojson"
 
-    print(f"Lade {QUELLE.rsplit('/', 1)[-1]} ...")
-    with urllib.request.urlopen(QUELLE, timeout=60) as r:
+    print(f"Lade {quelle.rsplit('/', 1)[-1]} ...")
+    with urllib.request.urlopen(quelle, timeout=60) as r:
         welt = json.loads(r.read().decode("utf-8"))
     print(f"  {len(welt['features'])} Gebiete weltweit")
 
@@ -161,7 +167,15 @@ def main() -> None:
 
     kb = ziel.stat().st_size / 1024
     print(f"Geschrieben: {ziel.name} — {len(ausgabe)} Gebiete, {kb:.0f} KB")
-    print("Gebiete:", ", ".join(f["properties"]["name"] for f in ausgabe[:12]), "...")
+    print("  ", ", ".join(f["properties"]["name"] for f in ausgabe[:10]), "...")
+
+
+
+def main() -> None:
+    root = find_project_root(Path(__file__).resolve())
+    jahre = [int(a) for a in sys.argv[1:]] or list(JAHRE)
+    for jahr in jahre:
+        aufbereiten(jahr, root)
 
 
 if __name__ == "__main__":
