@@ -48,9 +48,10 @@ Das Projekt verfolgt drei Hauptziele:
 │ ├── romkorr_map.html # Aktuelle finale Karten-HTML
 │ └── alt/ # Frühere Karten-Versionen (nicht versioniert)
 │
-├── tools/ # Prüfwerkzeuge für die Georeferenzierung
-│ ├── check_gcps.py
-│ └── tps_fold.py
+├── tools/ # Hilfsskripte
+│ ├── check_gcps.py # Passpunkte der Georeferenzierung prüfen
+│ ├── tps_fold.py # Faltungen der Georeferenzierung finden
+│ └── prepare_borders.py # historische Territorialgrenzen aufbereiten
 │
 ├── backup/ # Manuelle Sicherungen (nicht versioniert)
 │
@@ -141,6 +142,12 @@ Diese Dateien bilden die **Grundlage aller weiteren Analysen und Visualisierunge
 - Darstellung von:
   - Korrespondenz-Routen (gebündelt; Liniendicke/Deckkraft = Briefanzahl, Klick zeigt Richtungs-Statistik)
   - filterabhängige Heatmap (Verlauf blau→grün→rot), im Ebenen-Menü zuschaltbar
+  - **Territorien um 1800** als zuschaltbare Ebene: 50 Gebiete mit Namen, aus dem
+    Datensatz [historical-basemaps](https://github.com/aourednik/historical-basemaps)
+    (GPL-3.0). Gewählt ist das Stützjahr 1800 — der Bestand hat seinen Median 1798,
+    77 % der Briefe stammen aus 1795 oder später. Aufbereitet von
+    `tools/prepare_borders.py`; Beschriftungen erscheinen zoomabhängig, damit
+    Kleinstaaten die Übersicht nicht zustellen
   - Hotspots als Proportionalkreise (Kreisfläche und Zahl = Briefanzahl im aktiven
     Filter — Kreise wachsen, schrumpfen und verschwinden mit Person-/Ort-/Jahresfilter
     und Zeit-Animation; benachbarte Orte verschmelzen beim Herauszoomen und teilen
@@ -254,7 +261,8 @@ pip install -r requirements.txt
   `outputs/romkorr_map.html` kann direkt auf einen Webspace hochgeladen werden.
 - Es werden keine personenbezogenen Daten von Besuchern verarbeitet.
 - Externe Inhalte (werden beim Öffnen aus dem Internet geladen):
-  - Esri „World Light Gray" (helle Basiskarte) / Leaflet — bewusst nicht CARTO:
+  - Esri „World Light Gray" (helle Basiskarte, voreingestellt) und OpenStreetMap
+    (detailliert), im Ebenen-Menü umschaltbar / Leaflet — bewusst nicht CARTO:
     deren anonyme Kacheln tragen seit Kurzem ein „API KEY REQUIRED"-Wasserzeichen
   - Allmaps-Tileserver (`allmaps.xyz`) — Kacheln der historischen Karte
     (Güssefeld 1789; Digitalisat: Princeton University Library, per IIIF)
