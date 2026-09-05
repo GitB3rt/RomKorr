@@ -156,7 +156,12 @@ Diese Dateien bilden die **Grundlage aller weiteren Analysen und Visualisierunge
 
 **Zweck**
 - Erzeugung der interaktiven Karte mit **Folium und JavaScript**
-- Aufbau der Benutzeroberfläche (Sidebar)
+- Aufbau der Benutzeroberfläche: drei Zonen — Filter und Trefferliste links,
+  Ebenen rechts, Ansichtswechsel oben (`Karte · Netzwerk · Lebenswege · Erwähnte
+  Orte · Info`). Netzwerk, Lebenswege und Erwähnte Orte sind keine Kartenfunktionen,
+  sondern eigene Lesarten desselben Bestands — zwei davon bringen eine eigene
+  Leaflet-Instanz mit; die Leiste liegt über den Ansichten, man kann also direkt
+  zwischen ihnen wechseln
 - Filter nach:
   - Person (Suchfeld über alle Personen, findet auch Teilnamen wie „Schlegel"),
     wahlweise eingeschränkt auf ihre Rolle als Absender oder Empfänger
@@ -177,7 +182,8 @@ Diese Dateien bilden die **Grundlage aller weiteren Analysen und Visualisierunge
     77 % ab 1795) und zeigt Batavische und Helvetische Republik. Aufbereitet von
     `tools/prepare_borders.py`; Beschriftungen erscheinen zoomabhängig, damit
     Kleinstaaten die Übersicht nicht zustellen
-  - Hotspots als Proportionalkreise (Kreisfläche und Zahl = Briefanzahl im aktiven
+  - Hotspots als Proportionalkreise, von Anfang an sichtbar (Kreisfläche und Zahl =
+    Briefanzahl im aktiven
     Filter — Kreise wachsen, schrumpfen und verschwinden mit Person-/Ort-/Jahresfilter
     und Zeit-Animation; benachbarte Orte verschmelzen beim Herauszoomen und teilen
     sich per Klick). Auch die Orts-Popups (Anzahl, Beispiele, Listen-Button) werden
@@ -327,8 +333,8 @@ pip install -r requirements.txt
     (Güssefeld 1789; Digitalisat: Princeton University Library, per IIIF)
   - d3.js via jsDelivr-CDN (nur für die Netzwerk-Ansicht)
   - Verlinkungen auf öffentlich zugängliche Briefquellen (briefe-der-romantik.de)
-- Die Karte startet bewusst ruhig: Hotspots und Heatmap sind zunächst aus und
-  werden oben rechts zugeschaltet.
+- Die Karte startet mit Routen und Hotspots; die Heatmap und die historischen
+  Ebenen werden oben rechts zugeschaltet.
 - Bei Veröffentlichung sollte die Datenschutzerklärung auf externe Kartendienste,
   CDN-Einbindung und ausgehende Links hinweisen.
 
